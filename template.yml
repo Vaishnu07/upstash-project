@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: SAM Template for Lambda functions with API Gateway integration and S3 trigger
+
+Resources:
+  
+
+  consumerlambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      CodeUri: sam_consumer
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: vaishnu-files
+      Events:
+        ApiGatewayEvent:
+          Type: Api
+          Properties:
+            Path: /my-endpoint
+            Method: get
+
+  producerlambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      CodeUri: sam_producer
+      
+      Events:
+        ApiGatewayEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
+      
