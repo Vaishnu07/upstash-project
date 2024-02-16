@@ -20,7 +20,7 @@ jobs:
           aws-region: ap-south-1 
       
       - name: Validate CloudFormation template
-        run: aws cloudformation validate-template --template-body file://template.yml
+        run: aws cloudformation validate-template --template-body file:Deploy CloudFormation.yml
       
       - name: Deploy CloudFormation stack
         run: aws cloudformation deploy --stack-name <upstashproject> --template.yml --capabilities CAPABILITY_IAM
