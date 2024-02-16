@@ -6,7 +6,16 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add your build steps here
+
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,11 +27,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1  # Replace with your desired AWS region code, e.g., us-east-1
-      
-    
 
       - name: Build SAM Application
         run: sam build
+
       - name: Deploy CloudFormation stack
-        run: 
-         echo "y" | sam deploy --config-env default --capabilities CAPABILITY_IAM
+        run: echo "y" | sam deploy --config-env default --capabilities CAPABILITY_IAM
