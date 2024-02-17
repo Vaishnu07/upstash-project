@@ -49,4 +49,4 @@ jobs:
           aws-region: ap-south-1
 
       - name: Deploy CloudFormation stack
-        run: echo "y" | sam deploy --config-env default --stack-name upstack --capabilities CAPABILITY_IAM
+        run: echo "y" | sam deploy --config-env default --capabilities CAPABILITY_IAM
