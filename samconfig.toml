@@ -1,6 +1,6 @@
 version = 0.1
 [default.deploy.parameters]
-stack_name ="upstash"
+stack_name = "upstash"
 resolve_s3 = true
 s3_prefix = "upstashproject"
 region = "ap-south-1"
