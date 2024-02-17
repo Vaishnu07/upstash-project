@@ -11,6 +11,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install SAM CLI
+        uses: aws-actions/setup-sam@v1
+        with:
+          sam-cli-version: 'latest' # Ensure you have the latest version for SAM CLI
+          sam-cli-telemetry: true
+
+      - name: Build SAM Application
+        run: sam build
+
+      - name: Upload SAM build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: sam-artifacts
+          path: .aws-sam/build
 
   deploy:
     needs: build
@@ -24,5 +43,4 @@ jobs:
           aws-region: ap-south-1
 
       - name: Deploy CloudFormation stack
-        run:  echo "y" | sam deploy --config-env default --capabilities CAPABILITY_IAM
-
+        run: echo "y" | sam deploy --config-env default --capabilities CAPABILITY_IAM
