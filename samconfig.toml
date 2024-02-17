@@ -1,9 +1,5 @@
-[nonprod.deploy]
-[nonprod.deploy.parameters]
-
 version = 0.1
 [default.deploy.parameters]
-stackname = "upstack"
 resolve_s3 = true
 s3_prefix = "upstashproject"
 region = "ap-south-1"
