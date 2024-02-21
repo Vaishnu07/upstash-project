@@ -18,9 +18,7 @@ jobs:
 
       - name: Install SAM CLI
         uses: aws-actions/setup-sam@v1
-        with:
-          sam-cli-version: 'latest' # Ensure you have the latest version for SAM CLI
-          sam-cli-telemetry: true
+       
 
       - name: Build SAM Application
         run: sam build
